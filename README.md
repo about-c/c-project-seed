@@ -1,3 +1,3 @@
 # readme
 
-Minimal C prigramming project directory
+Minimal C programming project seed
