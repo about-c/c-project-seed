@@ -3,7 +3,9 @@
 Minimal C programming project seed
 
 ```
-cd build
-make
-./hello
+$ cmake -S . -B build
+$ cmake --build build
+$ build/hello
 ```
+
+Subsequent build use `cmake --build build`
