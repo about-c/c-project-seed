@@ -13,6 +13,7 @@ make
 
 
 ## Reference
-- *[C reference](https://en.cppreference.com/w/c)*
+
+- *[C Programming Wikibooks](https://en.wikibooks.org/wiki/C_Programming)*
 - *[A Simple Makefile Tutorial](http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/)*
 - *[GNU Make Manual](https://www.gnu.org/software/make/manual/)*
