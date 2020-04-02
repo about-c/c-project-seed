@@ -1,6 +1,6 @@
 # c-project-seed
 
-Minimal C programming project seed. Using this form is sufficient for most small scale projects.
+Minimal C programming project seed. Using this form is sufficient for most small scale projects. *See [A Simple Makefile Tutorial](http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/)*
 
 
 ## Install
