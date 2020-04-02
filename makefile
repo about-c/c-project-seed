@@ -7,6 +7,9 @@
 #
 # ------------------------------------------------------------------------
 
+# Project name and target executable program
+PROJECT=foo
+
 # Defines path to include, object and source directories
 INCLUDE_DIR=./include
 BUILD_DIR=./build
@@ -55,7 +58,7 @@ $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.c $(DEPS)
 # Use the special macros $@ and $^, which are the left and right sides of
 # the :, respectively. $@ is the name of the executable file and $^ lists
 # the object files to link.
-main: $(OBJ)
+$(PROJECT): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 
@@ -65,4 +68,4 @@ main: $(OBJ)
 # and to improve performance.
 .PHONY: clean
 clean:
-	$(CLEAN) $(BUILD_DIR)/*.o main
+	$(CLEAN) $(BUILD_DIR)/*.o $(PROJECT)
