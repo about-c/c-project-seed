@@ -1,11 +1,9 @@
 # readme
 
-Minimal C programming project seed
+Minimal C programming project seed. Using this form of makefile is sufficient for most small scale projects.
 
 ```
-$ cmake -S . -B build
-$ cmake --build build
-$ build/hello
+git clone https://github.com/frlorenzo/c-project-seed.git
+cd c-project-seed
+make
 ```
-
-Subsequent build use `cmake --build build`

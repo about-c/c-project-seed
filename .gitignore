@@ -1,8 +1,4 @@
 .DS_Store
-build/CMakeFiles
-build/cmake_install.cmake
-build/CMakeCache.txt
-build/hello
 logs
 *.log
 *.gz
