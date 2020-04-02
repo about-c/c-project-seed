@@ -3,21 +3,26 @@
 #
 # Commands:
 # 	$ make 			// default build
-# 	$ make clean 	// clean up
+# 	$ make clean 	// delete object files only
+# 	$ make cleanall	// delete object files and executable program
+# 	$ make help
 #
 # ------------------------------------------------------------------------
 
-# Project name and target executable program
-PROJECT=foo
+# Default build file(s) and dependencies
+PROJECT_NAME = foo
+HEADER_FILES = hello.h
+OBJECT_FILES = main.o hello.o
 
-# Defines path to include, object and source directories
-INCLUDE_DIR=./include
-BUILD_DIR=./build
-SOURCE_DIR=./src
 
-# Directory for local libraries
-# LIB_DIR=./lib
-# LIBS=-lm
+
+# Default directories for include, object and source
+BUILD_DIR	 = ./build
+LIBRARY_DIR	 = ./lib
+INCLUDE_DIR	 = ./include
+SOURCE_DIR	 = ./src
+
+
 
 # Defines the compiler to use in the build process. Ex. gcc, clang
 CC=gcc
@@ -25,18 +30,24 @@ CC=gcc
 # Defines flags to pass to the compiler
 CFLAGS = -I $(INCLUDE_DIR)
 
-# constant: list all dependencies .c source files need
-_DEPS = hello.h
-DEPS = $(patsubst %, $(INCLUDE_DIR)/%, $(_DEPS))
+# List all dependencies .c source files need
+DEPS = $(patsubst %, $(INCLUDE_DIR)/%, $(HEADER_FILES))
 
-# constant: list all object files as part to the build
-_OBJ = main.o hello.o
-OBJ = $(patsubst %, $(BUILD_DIR)/%, $(_OBJ))
+# List all object files as part to the build
+OBJ = $(patsubst %, $(BUILD_DIR)/%, $(OBJECT_FILES))
+
+# Defines the command to use remove (Unix) files
+CLEAN = rm -rf
+
+# Optional library flags
+LIBS = -lm
 
 
-# Defines the command to use for the clean up rule
-CLEAN=rm -rf 	# Unix, Linux
-# CLEAN=del /f 	# Windows
+
+# ------------------------------------------------------------------------
+# Targets Starts Here
+# ------------------------------------------------------------------------
+
 
 
 # Generate object files
@@ -53,19 +64,43 @@ $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 
+
 # Link object files to executable
 #
 # Use the special macros $@ and $^, which are the left and right sides of
 # the :, respectively. $@ is the name of the executable file and $^ lists
 # the object files to link.
-$(PROJECT): $(OBJ)
+$(PROJECT_NAME): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 
-# Clean up BUILD_DIR directories
+
+# Remove .o files only
 #
 # Uses phony target to avoid a conflict with a file of the same name,
 # and to improve performance.
-.PHONY: clean
-clean:
-	$(CLEAN) $(BUILD_DIR)/*.o $(PROJECT)
+.PHONY: cl
+cl:
+	$(CLEAN) $(BUILD_DIR)/*.o
+
+
+
+# Remove .o and executable files
+#
+# Uses phony target to avoid a conflict with a file of the same name,
+# and to improve performance.
+.PHONY: cleanall
+cleanall:
+	$(CLEAN) $(BUILD_DIR)/*.o $(PROJECT_NAME)
+
+
+
+# Display help information
+#
+help:
+	@echo "USAGE: make [option]"
+	@echo "\t- clean \t delete object files only"
+	@echo "\t- cleanall \t delete object files and executable program"
+
+
+# end
