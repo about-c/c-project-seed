@@ -2,7 +2,7 @@
 #include "hello.h"
 
 int main() {
-    say_hello("Felipe Lorenzo VI");
+    say_hello("John Doe");
     return 0;
 }
 

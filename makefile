@@ -15,10 +15,10 @@ CC=clang
 CFLAGS=-I .
 
 # Defines dependency files which .c source files need
-DEPS=hello.h
+DEPS = hello.h
 
-# Defines -o flag and the name of the executable file
-OUTFILE=-o hello
+# List all object files as part to the build
+OBJ = main.o hello.o
 
 # Defines the command to use for the clean up rule
 CLEAN=rm -rf 	# Unix, Linux
@@ -28,7 +28,8 @@ CLEAN=rm -rf 	# Unix, Linux
 # Generate object files
 #
 # The rule applies to all files ending in *.o in which *.o files depends
-# on *.c source and files included in DEPS macro.
+# on *.c source and files included in DEPS macro. This allows recompile
+# even if header files are modified.
 #
 # The -c flag says to generate the object file, the -o $@ says to put the
 # output of the compilation in the file named on the left side of the :,
@@ -38,9 +39,13 @@ CLEAN=rm -rf 	# Unix, Linux
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 
-# link object files to executable
-main: main.o hello.o
-	$(CC) $(OUTFILE) main.o hello.o
+# Link object files to executable
+#
+# Use the special macros $@ and $^, which are the left and right sides of
+# the :, respectively. $@ is the name of the executable file and $^ lists
+# the object files to link.
+main: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
 
 
 # Does clean up, removing .o and executable files
