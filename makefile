@@ -28,7 +28,7 @@ SOURCE_DIR	 = ./src
 CC=gcc
 
 # Defines flags to pass to the compiler
-CFLAGS = -I $(INCLUDE_DIR)
+CFLAGS = -I $(INCLUDE_DIR) -Wall -Wextra -pedantic
 
 # List all dependencies .c source files need
 DEPS = $(patsubst %, $(INCLUDE_DIR)/%, $(HEADER_FILES))
