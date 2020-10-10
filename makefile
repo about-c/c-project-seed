@@ -10,7 +10,7 @@
 # ------------------------------------------------------------------------
 
 # Default build file(s) and dependencies
-PROJECT_NAME = foo
+PROJECT_NAME = hello
 HEADER_FILES = hello.h
 OBJECT_FILES = main.o hello.o
 
