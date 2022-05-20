@@ -1,4 +1,4 @@
-# c-project-seed
+# C Project Seed
 
 Minimal C programming project seed. Using this form is sufficient for most small scale projects. 
 
